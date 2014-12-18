@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+if [ -z "$(which psql)" ]; then
+  printf "Api requires the PostgreSQL database\n"
+  exit 1
+fi
+
+localdir="$(dirname $0)"
+prefix='api_'
+envs='dev test'
+
+drop_dbs() {
+  for db in $envs; do
+    local name="$prefix$db"
+    if dropdb "$name"; then
+      printf "successfully dropped $name database\n"
+    fi
+  done
+}
+
+create_dbs() {
+  for db in $envs; do
+    local name="$prefix$db"
+    if createdb "$name"; then
+      psql "$name" < "$localdir/../db/schema.sql" > /dev/null
+      printf "successfully created $name database\n"
+    fi
+  done
+}
+
+db_console() {
+  psql "api_$1"
+  exit 0
+}
+
+usage() {
+  printf "USAGE: db [create|drop|dev|test]"
+  exit 1
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    'drop' )         drop_dbs      ; shift 1 ;;
+    'create' )       create_dbs    ; shift 1 ;;
+    'dev' | 'test' ) db_console $1 ;;
+    * )              usage
+  esac
+done

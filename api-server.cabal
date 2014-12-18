@@ -1,0 +1,131 @@
+name:          api-server
+version:       0.0.1
+synopsis:      API Server
+license-file:  LICENSE
+author:        Chris Wilson and Jon Childress
+maintainer:    dev+jonplussed+twopoint718@bendyworks.com
+category:      Network
+build-type:    Simple
+cabal-version: >= 1.10
+
+
+
+library
+  default-language:
+      Haskell2010
+  ghc-options:
+      -W -Wall -Werror
+  hs-source-dirs:
+      lib
+  exposed-modules:
+      Api.Abstract
+    , Api.Controllers.Resource
+    , Api.Controllers.User
+    , Api.Helpers.Controller
+    , Api.Mailers.Verify
+    , Api.Mappers.PendingUserResource
+    , Api.Mappers.Resource
+    , Api.Mappers.User
+    , Api.Routes
+    , Api.Server
+    , Api.Types.Config
+    , Api.Types.Fields
+    , Api.Types.PendingUserResource
+    , Api.Types.Resource
+    , Api.Types.Server
+    , Api.Types.User
+  build-depends:
+      base
+    , aeson
+    , bytestring
+    , email-validate
+    , hasql
+    , hasql-backend
+    , hasql-postgres
+    , hspec-wai-json
+    , http-types
+    , mime-mail
+    , mtl
+    , network
+    , network-uri
+    , resource-pool
+    , scotty
+    , smtp-mail
+    , stm
+    , text
+    , time
+    , transformers
+    , vector
+    , wai
+    , wai-extra
+    , warp
+  default-extensions:
+      OverloadedStrings
+    , DeriveDataTypeable
+    , GeneralizedNewtypeDeriving
+    , MultiParamTypeClasses
+
+
+
+executable api-server
+  default-language:
+      Haskell2010
+  ghc-options:
+      -W -Wall -Werror
+  hs-source-dirs:
+      src
+  main-is:
+      Main.hs
+  build-depends:
+      base
+    , bytestring
+    , api-server
+    , network-uri
+    , text
+
+
+
+test-suite api-test
+  default-language:
+      Haskell2010
+  ghc-options:
+      -W -Wall -Werror
+  hs-source-dirs:
+      test, lib
+  main-is:
+      Spec.hs
+  type:
+      exitcode-stdio-1.0
+  build-depends:
+      base
+    , aeson
+    , aeson-qq
+    , bytestring
+    , email-validate
+    , hasql
+    , hasql-backend
+    , hasql-postgres
+    , hspec
+    , hspec-wai >= 0.5.1
+    , hspec-wai-json
+    , http-types
+    , mime-mail
+    , mtl
+    , network
+    , network-uri
+    , resource-pool
+    , scotty
+    , smtp-mail
+    , stm
+    , text
+    , time
+    , transformers
+    , vector
+    , wai
+    , wai-extra
+    , warp
+  default-extensions:
+      OverloadedStrings
+    , DeriveDataTypeable
+    , GeneralizedNewtypeDeriving
+    , MultiParamTypeClasses
