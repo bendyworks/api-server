@@ -1,13 +1,17 @@
 name:          api-server
 version:       0.0.1
 synopsis:      API Server
+description:   A JSON API server written in Haskell
+license:       MIT
 license-file:  LICENSE
 author:        Chris Wilson and Jon Childress
 maintainer:    dev+jonplussed+twopoint718@bendyworks.com
 category:      Network
 build-type:    Simple
 cabal-version: >= 1.10
-
+source-repository head
+  type:        git
+  location:    https://github.com/bendyworks/api-server.git
 
 
 library
