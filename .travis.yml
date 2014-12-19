@@ -27,6 +27,10 @@ install:
  - cabal update
  - cabal install --only-dependencies --enable-tests
 
+before_script:
+  - psql -c 'create database api_test;' -U postgres
+  - psql -U postgres api_test < ./db/schema.sql
+
 # Here starts the actual work to be performed for the package under test;
 # any command which exits with a non-zero exit code causes the build to
 # fail.
