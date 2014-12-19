@@ -1,6 +1,6 @@
 # API Server
 
-![TravisCI Status](https://travis-ci.org/bendyworks/api-server.svg "TravisCI Status")
+[![TravisCI Status](https://travis-ci.org/bendyworks/api-server.svg "TravisCI Status")](https://travis-ci.org/bendyworks/api-server)
 
 An API Server in Haskell. Written as a demonstration of how to use
 [hasql][hsql] and [scotty][stty] together in a realistic (we hope) api
