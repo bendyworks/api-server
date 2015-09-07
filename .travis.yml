@@ -8,7 +8,7 @@ before_install:
   - sudo apt-get install stack -y
 
 install:
-  - stack setup
+  - stack --verbose setup
 
 before_script:
   - psql -c 'create database api_test;' -U postgres
