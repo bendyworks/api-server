@@ -3,4 +3,4 @@ packages:
 - '.'
 extra-deps:
 - 'smtp-mail-0.1.4.5'
-resolver: lts-0.3
+resolver: nightly-2014-12-24
