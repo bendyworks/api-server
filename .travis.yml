@@ -1,6 +1,6 @@
 language: haskell
 
-ghc: 7.8.3
+ghc: 7.8.4
 
 before_install:
   # Instructions taken from https://github.com/commercialhaskell/stack/wiki/Downloads
