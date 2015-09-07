@@ -86,6 +86,7 @@ executable api-server
       base
     , bytestring
     , api-server
+    , network
     , network-uri
     , text
 
