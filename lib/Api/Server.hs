@@ -9,8 +9,9 @@ module Api.Server
 import Api.Routes (routes)
 import Control.Monad.Reader (runReaderT)
 import Data.Maybe (fromJust)
+import Data.Text.Encoding (encodeUtf8)
 import Hasql (Session, session, sessionSettings, sessionUnlifter)
-import Hasql.Postgres (Postgres (Postgres))
+import Hasql.Postgres (Postgres, Settings(ParamSettings))
 import Network.Wai (Application)
 import Network.Wai.Handler.Warp (run)
 import Network.Mail.Mime (Mail, renderSendMail)
@@ -41,12 +42,12 @@ initDb con = session postgres connect
     connect = fromJust $ sessionSettings
       (db_maxConnsCount con)
       (db_keepAliveSeconds con)
-    postgres = Postgres
+    postgres = ParamSettings
       (db_host con)
       (db_port con)
-      (db_user con)
-      (db_password con)
-      (db_name con)
+      (encodeUtf8 (db_user con))
+      (encodeUtf8 (db_password con))
+      (encodeUtf8 (db_name con))
 
 -- private functions
 
