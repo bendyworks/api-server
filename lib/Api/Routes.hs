@@ -16,10 +16,10 @@ routes = defaultHandler fallback >> do
     get  "/verify/:uuid"     User.verifyEdit
 
     post "/users"            User.create
-    post "/users/:user_id" $ User.authenticate User.unverifiedEdit
+    post "/users/:user_id" $ User.authenticate >>= User.unverifiedEdit
 
-    get  "/resource"       $ User.authenticate Resource.show
-    post "/resource"       $ User.authenticate Resource.edit
+    get  "/resource"       $ User.authenticate >>= Resource.show
+    post "/resource"       $ User.authenticate >>= Resource.edit
 
 fallback :: ApiException -> ApiActionM s ()
 fallback err = case err of
