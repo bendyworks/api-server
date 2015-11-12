@@ -67,8 +67,8 @@ verifyEdit = do
 loginFromHeader :: ApiActionM s (Maybe User)
 loginFromHeader = do
     authToken <- header "Authorization"
-    uid <- reqParam "user_id"
     case LT.words <$> authToken of
-      Just ["Token", token] ->
+      Just ["Token", token] -> do
+        uid <- reqParam "user_id"
         query $ User.findByLogin . Login uid . UserToken $ LT.toStrict token
       _ -> raise MissingAuthToken
